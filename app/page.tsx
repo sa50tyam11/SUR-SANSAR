@@ -48,13 +48,13 @@ export default function Home() {
           </div>
           
           {/* Text Logo */}
-          <div className="flex flex-col">
-            <span className="font-display text-xl md:text-2xl tracking-[0.15em] font-medium leading-none mb-1 text-slate-100">
-              SUR <span className="text-[#D6A95B]/70 text-lg">•</span> SANSAR
-            </span>
-            <span className="text-slate-400 text-[9px] md:text-[10px] tracking-widest uppercase font-medium">
-              Music of Every State
-            </span>
+          <div className="flex flex-col ml-1">
+            <h1 className="text-4xl tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#FDE68A] via-white to-white leading-none drop-shadow-md" style={{ fontFamily: 'var(--font-rozha)' }}>
+              सुर <span className="text-[#D6A95B] text-2xl px-2 drop-shadow-none font-sans">•</span> संसार
+            </h1>
+            <p className="text-[#94a3b8] text-[0.65rem] font-sans tracking-[0.25em] mt-1.5 ml-1 uppercase">
+              Music of every state
+            </p>
           </div>
         </div>
 
