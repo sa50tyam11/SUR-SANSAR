@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <main className="relative h-screen bg-black overflow-hidden flex flex-col">
       {/* Interactive Header */}
-      <header className="absolute top-0 w-full z-50 px-6 md:px-12 lg:px-24 py-4 md:py-6 flex items-center justify-between pointer-events-none bg-black/30 backdrop-blur-md border-b border-white/10 shadow-2xl">
+      <header className="absolute top-0 w-full z-50 px-6 md:px-12 lg:px-24 py-4 md:py-6 flex items-center justify-between pointer-events-none bg-transparent">
         
         {/* Logo */}
         <div className="flex items-center gap-3 md:gap-5 pointer-events-auto group cursor-pointer w-1/3 text-white">
@@ -78,7 +78,7 @@ export default function Home() {
                 STATES
               </button>
               {isStatesOpen && (
-                <div className="absolute top-full mt-4 left-1/2 -translate-x-1/2 w-48 bg-black/60 backdrop-blur-xl rounded-md shadow-2xl p-2 z-50 max-h-80 overflow-y-auto border border-white/10">
+                <div className="absolute top-full mt-4 left-1/2 -translate-x-1/2 w-48 bg-black rounded-md shadow-2xl p-2 z-50 max-h-80 overflow-y-auto border border-white/10">
                   <div className="grid grid-cols-1 gap-1">
                     {states.map(state => (
                       <button 
@@ -123,7 +123,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-20 left-0 w-full bg-black/60 backdrop-blur-xl shadow-2xl border-b border-white/10 p-6 z-40 pointer-events-auto"
+            className="absolute top-20 left-0 w-full bg-black shadow-2xl border-b border-white/10 p-6 z-40 pointer-events-auto"
           >
             <div className="max-w-2xl mx-auto">
               <div className="relative">

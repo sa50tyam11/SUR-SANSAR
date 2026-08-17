@@ -364,30 +364,367 @@ const dummyStates: State[] = [
 ]
 
 const dummyTracks: Record<string, Track[]> = {
-  '29': [
+  // Andaman and Nicobar Islands
+  '1': [
     {
-      id: 't1', state_id: '29', title: 'Kesariya Balam', artist: 'Folk Ensemble',
-      instrument_type: 'Kamaicha', audio_url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-      duration_seconds: 372, license_type: 'CC-BY', play_count: 100, created_at: new Date().toISOString()
+      id: 't_an_1', state_id: '1', title: 'Nicobari Folk Chants', artist: 'Isles Heritage Ensemble',
+      instrument_type: 'Bamboo Flute & Shells', audio_url: '/andaman-and-nicobar-islands.mp3',
+      duration_seconds: 320, license_type: 'CC-BY', play_count: 145, created_at: new Date().toISOString()
+    }
+  ],
+  // Andhra Pradesh
+  '2': [
+    {
+      id: 't_ap_1', state_id: '2', title: 'Carnatic Kriti in Raga Kalyani', artist: 'Vijayawada Classical Group',
+      instrument_type: 'Saraswati Veena', audio_url: '/andhra-pradesh.mp3',
+      duration_seconds: 480, license_type: 'CC-BY', play_count: 890, created_at: new Date().toISOString()
     },
     {
-      id: 't2', state_id: '29', title: 'Ghoomar Dance', artist: 'Local Artists',
-      instrument_type: 'Dholak', audio_url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-      duration_seconds: 245, license_type: 'CC-BY', play_count: 50, created_at: new Date().toISOString()
+      id: 't_ap_2', state_id: '2', title: 'Burra Katha', artist: 'Telugu Folk Masters',
+      instrument_type: 'Tambura & Dakki', audio_url: '/andhra-pradesh.mp3',
+      duration_seconds: 310, license_type: 'CC-BY', play_count: 420, created_at: new Date().toISOString()
     }
   ],
-  '18': [
+  // Arunachal Pradesh
+  '3': [
     {
-      id: 't3', state_id: '18', title: 'Chenda Melam', artist: 'Temple Musicians',
-      instrument_type: 'Chenda', audio_url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-      duration_seconds: 180, license_type: 'CC-BY', play_count: 75, created_at: new Date().toISOString()
+      id: 't_ar_1', state_id: '3', title: 'Aji Lhamu Dance Score', artist: 'Monpa Cultural Troupe',
+      instrument_type: 'Cymbals & Drums', audio_url: '/arunachal-pradesh.mp3',
+      duration_seconds: 245, license_type: 'CC-BY', play_count: 210, created_at: new Date().toISOString()
     }
   ],
+  // Assam
   '4': [
     {
-      id: 't4', state_id: '4', title: 'Bihu Celebration', artist: 'Assam Folk Group',
-      instrument_type: 'Pepa', audio_url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
-      duration_seconds: 210, license_type: 'CC-BY', play_count: 20, created_at: new Date().toISOString()
+      id: 't_as_1', state_id: '4', title: 'Bihu Spring Celebration', artist: 'Brahmaputra Folk Collective',
+      instrument_type: 'Pepa & Dhol', audio_url: '/assam.mp3',
+      duration_seconds: 315, license_type: 'CC-BY', play_count: 1250, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_as_2', state_id: '4', title: 'Kamrupi Lokgeet', artist: 'Assam Valley Singers',
+      instrument_type: 'Dotara', audio_url: '/assam.mp3',
+      duration_seconds: 280, license_type: 'CC-BY', play_count: 840, created_at: new Date().toISOString()
+    }
+  ],
+  // Bihar
+  '5': [
+    {
+      id: 't_br_1', state_id: '5', title: 'Chhath Puja Chaiti', artist: 'Bhojpuri Heritage Ensemble',
+      instrument_type: 'Harmonium & Dholak', audio_url: '/chhath.mp3',
+      duration_seconds: 405, license_type: 'CC-BY', play_count: 3200, created_at: new Date().toISOString()
+    }
+  ],
+  // Chandigarh
+  '6': [
+    {
+      id: 't_ch_1', state_id: '6', title: 'Modern Sufi Fusion', artist: 'City Beautiful Collective',
+      instrument_type: 'Tabla & Guitar', audio_url: '/chandigarh.mp3',
+      duration_seconds: 275, license_type: 'CC-BY', play_count: 530, created_at: new Date().toISOString()
+    }
+  ],
+  // Chhattisgarh
+  '7': [
+    {
+      id: 't_ct_1', state_id: '7', title: 'Pandavani Tale', artist: 'Raipur Folk Artists',
+      instrument_type: 'Ektara', audio_url: '/chhattisgarh.mp3',
+      duration_seconds: 520, license_type: 'CC-BY', play_count: 670, created_at: new Date().toISOString()
+    }
+  ],
+  // Dadra and Nagar Haveli
+  '8': [
+    {
+      id: 't_dn_1', state_id: '8', title: 'Tarpa Harvest Dance', artist: 'Warli Tribal Ensemble',
+      instrument_type: 'Tarpa', audio_url: '/dadra-and-nagar-haveli.mp3',
+      duration_seconds: 195, license_type: 'CC-BY', play_count: 110, created_at: new Date().toISOString()
+    }
+  ],
+  // Daman and Diu
+  '9': [
+    {
+      id: 't_dd_1', state_id: '9', title: 'Coastal Mando', artist: 'Diu Portuguese Heritage Group',
+      instrument_type: 'Ghumat', audio_url: '/daman-and-diu.mp3',
+      duration_seconds: 230, license_type: 'CC-BY', play_count: 240, created_at: new Date().toISOString()
+    }
+  ],
+  // Delhi
+  '10': [
+    {
+      id: 't_dl_1', state_id: '10', title: 'Nizamuddin Qawwali', artist: 'Sufi Heritage Brothers',
+      instrument_type: 'Harmonium & Tabla', audio_url: '/delhi.mp3',
+      duration_seconds: 640, license_type: 'CC-BY', play_count: 4500, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_dl_2', state_id: '10', title: 'Hindustani Khayal', artist: 'Delhi Gharana Masters',
+      instrument_type: 'Sitar', audio_url: '/delhi.mp3',
+      duration_seconds: 480, license_type: 'CC-BY', play_count: 1200, created_at: new Date().toISOString()
+    }
+  ],
+  // Goa
+  '11': [
+    {
+      id: 't_ga_1', state_id: '11', title: 'Dekhnni Folk Song', artist: 'Konkani Cultural Troupe',
+      instrument_type: 'Ghumat & Violin', audio_url: '/goa.mp3',
+      duration_seconds: 210, license_type: 'CC-BY', play_count: 890, created_at: new Date().toISOString()
+    }
+  ],
+  // Gujarat
+  '12': [
+    {
+      id: 't_gj_1', state_id: '12', title: 'Traditional Garba Raas', artist: 'Saurashtra Folk Artists',
+      instrument_type: 'Dhol & Manjira', audio_url: '/gujarat.mp3',
+      duration_seconds: 420, license_type: 'CC-BY', play_count: 5600, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_gj_2', state_id: '12', title: 'Dayro Morning Melody', artist: 'Kutch Heritage Singers',
+      instrument_type: 'Jantar', audio_url: '/gujarat.mp3',
+      duration_seconds: 340, license_type: 'CC-BY', play_count: 980, created_at: new Date().toISOString()
+    }
+  ],
+  // Haryana
+  '13': [
+    {
+      id: 't_hr_1', state_id: '13', title: 'Ragini Epic', artist: 'Rohtak Folk Ensemble',
+      instrument_type: 'Sarangi & Been', audio_url: '/haryana.mp3',
+      duration_seconds: 380, license_type: 'CC-BY', play_count: 1100, created_at: new Date().toISOString()
+    }
+  ],
+  // Himachal Pradesh
+  '14': [
+    {
+      id: 't_hp_1', state_id: '14', title: 'Kinnauri Nati', artist: 'Himalayan Echoes',
+      instrument_type: 'Karnal & Shehnai', audio_url: '/himachal-pradesh.mp3',
+      duration_seconds: 290, license_type: 'CC-BY', play_count: 1450, created_at: new Date().toISOString()
+    }
+  ],
+  // Jammu and Kashmir
+  '15': [
+    {
+      id: 't_jk_1', state_id: '15', title: 'Sufiana Kalam', artist: 'Kashmir Valley Masters',
+      instrument_type: 'Santoor & Rabab', audio_url: '/jammu-and-kashmir.mp3',
+      duration_seconds: 410, license_type: 'CC-BY', play_count: 2200, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_jk_2', state_id: '15', title: 'Rouf Spring Dance', artist: 'Srinagar Folk Chorus',
+      instrument_type: 'Tumbaknari', audio_url: '/jammu-and-kashmir.mp3',
+      duration_seconds: 260, license_type: 'CC-BY', play_count: 1800, created_at: new Date().toISOString()
+    }
+  ],
+  // Jharkhand
+  '16': [
+    {
+      id: 't_jh_1', state_id: '16', title: 'Santhali Rhythms', artist: 'Chota Nagpur Tribal Artists',
+      instrument_type: 'Madal & Bansuri', audio_url: '/jharkhand.mp3',
+      duration_seconds: 310, license_type: 'CC-BY', play_count: 670, created_at: new Date().toISOString()
+    }
+  ],
+  // Karnataka
+  '17': [
+    {
+      id: 't_ka_1', state_id: '17', title: 'Mysore Veena Recital', artist: 'Carnatic Virtuosos',
+      instrument_type: 'Veena & Mridangam', audio_url: '/karnataka.mp3',
+      duration_seconds: 540, license_type: 'CC-BY', play_count: 3100, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_ka_2', state_id: '17', title: 'Dollu Kunitha Beats', artist: 'Karnataka Folk Ensemble',
+      instrument_type: 'Dollu', audio_url: '/karnataka.mp3',
+      duration_seconds: 245, license_type: 'CC-BY', play_count: 1400, created_at: new Date().toISOString()
+    }
+  ],
+  // Kerala
+  '18': [
+    {
+      id: 't_kl_1', state_id: '18', title: 'Chenda Melam Orchestration', artist: 'Thrissur Temple Musicians',
+      instrument_type: 'Chenda & Ilathalam', audio_url: '/kerala.mp3',
+      duration_seconds: 420, license_type: 'CC-BY', play_count: 4200, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_kl_2', state_id: '18', title: 'Sopana Sangeetham', artist: 'Kerala Heritage Singers',
+      instrument_type: 'Edakka', audio_url: '/kerala.mp3',
+      duration_seconds: 380, license_type: 'CC-BY', play_count: 1800, created_at: new Date().toISOString()
+    }
+  ],
+  // Lakshadweep
+  '19': [
+    {
+      id: 't_ld_1', state_id: '19', title: 'Lava Dance Rhythms', artist: 'Minicoy Island Artists',
+      instrument_type: 'Drums', audio_url: '/lakshadweep.mp3',
+      duration_seconds: 215, license_type: 'CC-BY', play_count: 340, created_at: new Date().toISOString()
+    }
+  ],
+  // Madhya Pradesh
+  '20': [
+    {
+      id: 't_mp_1', state_id: '20', title: 'Malvi Folk Song', artist: 'Malwa Heritage Group',
+      instrument_type: 'Dholak & Harmonium', audio_url: '/madhya-pradesh.mp3',
+      duration_seconds: 295, license_type: 'CC-BY', play_count: 1100, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_mp_2', state_id: '20', title: 'Dhrupad Classical', artist: 'Gwalior Gharana',
+      instrument_type: 'Pakhawaj', audio_url: '/madhya-pradesh.mp3',
+      duration_seconds: 680, license_type: 'CC-BY', play_count: 2400, created_at: new Date().toISOString()
+    }
+  ],
+  // Maharashtra
+  '21': [
+    {
+      id: 't_mh_1', state_id: '21', title: 'Lavani Performance', artist: 'Pune Cultural Troupe',
+      instrument_type: 'Dholki', audio_url: '/maharashtra.mp3',
+      duration_seconds: 310, license_type: 'CC-BY', play_count: 4800, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_mh_2', state_id: '21', title: 'Abhang Devotional', artist: 'Warkari Singers',
+      instrument_type: 'Taal & Veena', audio_url: '/maharashtra.mp3',
+      duration_seconds: 405, license_type: 'CC-BY', play_count: 3600, created_at: new Date().toISOString()
+    }
+  ],
+  // Manipur
+  '22': [
+    {
+      id: 't_mn_1', state_id: '22', title: 'Nata Sankirtana', artist: 'Imphal Classical Ensemble',
+      instrument_type: 'Pung & Kartal', audio_url: '/manipur.mp3',
+      duration_seconds: 460, license_type: 'CC-BY', play_count: 950, created_at: new Date().toISOString()
+    }
+  ],
+  // Meghalaya
+  '23': [
+    {
+      id: 't_ml_1', state_id: '23', title: 'Wangala Festival Beats', artist: 'Garo Tribal Musicians',
+      instrument_type: 'Dama & Flute', audio_url: '/meghalaya.mp3',
+      duration_seconds: 280, license_type: 'CC-BY', play_count: 720, created_at: new Date().toISOString()
+    }
+  ],
+  // Mizoram
+  '24': [
+    {
+      id: 't_mz_1', state_id: '24', title: 'Cheraw Bamboo Dance', artist: 'Aizawl Folk Artists',
+      instrument_type: 'Bamboo Staves', audio_url: '/mizoram.mp3',
+      duration_seconds: 220, license_type: 'CC-BY', play_count: 850, created_at: new Date().toISOString()
+    }
+  ],
+  // Nagaland
+  '25': [
+    {
+      id: 't_nl_1', state_id: '25', title: 'Hornbill Chants', artist: 'Naga Warrior Chorus',
+      instrument_type: 'Log Drum', audio_url: '/nagaland.mp3',
+      duration_seconds: 340, license_type: 'CC-BY', play_count: 1300, created_at: new Date().toISOString()
+    }
+  ],
+  // Odisha
+  '26': [
+    {
+      id: 't_or_1', state_id: '26', title: 'Odissi Mardal Symphony', artist: 'Konark Classical Group',
+      instrument_type: 'Mardal', audio_url: '/odisha.mp3',
+      duration_seconds: 490, license_type: 'CC-BY', play_count: 2100, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_or_2', state_id: '26', title: 'Sambalpuri Folk', artist: 'Western Odisha Ensemble',
+      instrument_type: 'Dhol & Nishan', audio_url: '/odisha.mp3',
+      duration_seconds: 275, license_type: 'CC-BY', play_count: 3400, created_at: new Date().toISOString()
+    }
+  ],
+  // Puducherry
+  '27': [
+    {
+      id: 't_py_1', state_id: '27', title: 'Auroville Ambient Soundscape', artist: 'Puducherry Fusion Artists',
+      instrument_type: 'Synthesizer & Flute', audio_url: '/puducherry.mp3',
+      duration_seconds: 410, license_type: 'CC-BY', play_count: 890, created_at: new Date().toISOString()
+    }
+  ],
+  // Punjab
+  '28': [
+    {
+      id: 't_pb_1', state_id: '28', title: 'Bhangra Dhol Beats', artist: 'Amritsar Rhythm Makers',
+      instrument_type: 'Dhol & Tumbi', audio_url: '/punjab.mp3',
+      duration_seconds: 250, license_type: 'CC-BY', play_count: 6500, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_pb_2', state_id: '28', title: 'Sufi Kafi', artist: 'Punjab Heritage Singers',
+      instrument_type: 'Harmonium', audio_url: '/punjab.mp3',
+      duration_seconds: 430, license_type: 'CC-BY', play_count: 2800, created_at: new Date().toISOString()
+    }
+  ],
+  // Rajasthan
+  '29': [
+    {
+      id: 't_rj_1', state_id: '29', title: 'Kesariya Balam (Manganiyar)', artist: 'Desert Folk Ensemble',
+      instrument_type: 'Kamaicha & Khartal', audio_url: '/rajasthan.mp3',
+      duration_seconds: 372, license_type: 'CC-BY', play_count: 8900, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_rj_2', state_id: '29', title: 'Ghoomar Traditional', artist: 'Jaipur Royal Artists',
+      instrument_type: 'Dholak & Shehnai', audio_url: '/rajasthan.mp3',
+      duration_seconds: 245, license_type: 'CC-BY', play_count: 5200, created_at: new Date().toISOString()
+    }
+  ],
+  // Sikkim
+  '30': [
+    {
+      id: 't_sk_1', state_id: '30', title: 'Maruni Dance Tune', artist: 'Himalayan Folk Group',
+      instrument_type: 'Madal', audio_url: '/sikkim.mp3',
+      duration_seconds: 290, license_type: 'CC-BY', play_count: 670, created_at: new Date().toISOString()
+    }
+  ],
+  // Tamil Nadu
+  '31': [
+    {
+      id: 't_tn_1', state_id: '31', title: 'Thillana in Raga Dhanashree', artist: 'Chennai Carnatic Masters',
+      instrument_type: 'Mridangam & Violin', audio_url: '/tamil-nadu.mp3',
+      duration_seconds: 520, license_type: 'CC-BY', play_count: 4500, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_tn_2', state_id: '31', title: 'Nadaswaram Mangala Isai', artist: 'Temple Vidwans',
+      instrument_type: 'Nadaswaram & Thavil', audio_url: '/tamil-nadu.mp3',
+      duration_seconds: 410, license_type: 'CC-BY', play_count: 3800, created_at: new Date().toISOString()
+    }
+  ],
+  // Telangana
+  '32': [
+    {
+      id: 't_tg_1', state_id: '32', title: 'Bathukamma Festival Song', artist: 'Deccan Folk Voices',
+      instrument_type: 'Dappu', audio_url: '/telangana.mp3',
+      duration_seconds: 270, license_type: 'CC-BY', play_count: 2400, created_at: new Date().toISOString()
+    }
+  ],
+  // Tripura
+  '33': [
+    {
+      id: 't_tr_1', state_id: '33', title: 'Hojagiri Balance Dance', artist: 'Reang Tribal Artists',
+      instrument_type: 'Kham & Sumui', audio_url: '/tripura.mp3',
+      duration_seconds: 310, license_type: 'CC-BY', play_count: 560, created_at: new Date().toISOString()
+    }
+  ],
+  // Uttar Pradesh
+  '34': [
+    {
+      id: 't_up_1', state_id: '34', title: 'Banaras Thumri', artist: 'Varanasi Classical Ensemble',
+      instrument_type: 'Tabla & Sarangi', audio_url: '/uttar-pradesh.mp3',
+      duration_seconds: 580, license_type: 'CC-BY', play_count: 3200, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_up_2', state_id: '34', title: 'Awadhi Kajari', artist: 'Lucknow Folk Singers',
+      instrument_type: 'Dholak', audio_url: '/uttar-pradesh.mp3',
+      duration_seconds: 340, license_type: 'CC-BY', play_count: 1800, created_at: new Date().toISOString()
+    }
+  ],
+  // Uttarakhand
+  '35': [
+    {
+      id: 't_ut_1', state_id: '35', title: 'Garhwali Jagar Chants', artist: 'Pahari Heritage Group',
+      instrument_type: 'Daur & Thali', audio_url: '/uttar-pradesh.mp3',
+      duration_seconds: 405, license_type: 'CC-BY', play_count: 1400, created_at: new Date().toISOString()
+    }
+  ],
+  // West Bengal
+  '36': [
+    {
+      id: 't_wb_1', state_id: '36', title: 'Baul Mystical Sangeet', artist: 'Birbhum Baul Collective',
+      instrument_type: 'Ektara & Duggi', audio_url: '/odisha.mp3',
+      duration_seconds: 360, license_type: 'CC-BY', play_count: 5100, created_at: new Date().toISOString()
+    },
+    {
+      id: 't_wb_2', state_id: '36', title: 'Rabindra Sangeet', artist: 'Kolkata Tagore Singers',
+      instrument_type: 'Esraj', audio_url: '/odisha.mp3',
+      duration_seconds: 290, license_type: 'CC-BY', play_count: 6700, created_at: new Date().toISOString()
     }
   ]
 }
