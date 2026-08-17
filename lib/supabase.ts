@@ -27,7 +27,17 @@ export interface Track {
   created_at: string
 }
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder'
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error(
+    '[SUR-SANSAR] Missing Supabase environment variables.\n' +
+    'Create a .env.local file in the project root with:\n' +
+    '  NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co\n' +
+    '  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key\n' +
+    'Get these from: Supabase Dashboard → Settings → API'
+  )
+}
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)

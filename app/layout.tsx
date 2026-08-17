@@ -34,6 +34,8 @@ export const metadata: Metadata = {
   description: "Explore the regional and folk music of India through an interactive map.",
 }
 
+import { AuthProvider } from "@/components/auth/AuthProvider"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -42,7 +44,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${inter.variable} ${playfair.variable} ${greatVibes.variable} ${rozha.variable}`}>
       <body className="bg-background-dark text-slate-200 font-sans min-h-screen selection:bg-gold-500/30">
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )

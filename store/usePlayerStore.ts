@@ -9,7 +9,7 @@ interface PlayerState {
   progress: number
   duration: number
   howl: Howl | null
-  
+
   // Actions
   play: (track?: Track) => void
   pause: () => void
@@ -17,9 +17,20 @@ interface PlayerState {
   seek: (time: number) => void
   setVolume: (volume: number) => void
   _updateProgress: () => void
+
+  /**
+   * Register a callback to fire when the current track naturally ends.
+   * Only one callback is supported at a time (last registration wins).
+   * Returns an unregister function.
+   */
+  registerOnEnd: (cb: () => void) => () => void
 }
 
-let progressInterval: NodeJS.Timeout | null = null;
+let progressInterval: NodeJS.Timeout | null = null
+
+// Module-level callback ref — survives Zustand state updates without
+// causing re-subscriptions or stale-closure issues inside the Howl instance.
+let _onEndCallback: (() => void) | null = null
 
 export const usePlayerStore = create<PlayerState>((set, get) => ({
   currentTrack: null,
@@ -29,9 +40,16 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   duration: 0,
   howl: null,
 
+  registerOnEnd: (cb: () => void) => {
+    _onEndCallback = cb
+    return () => {
+      if (_onEndCallback === cb) _onEndCallback = null
+    }
+  },
+
   play: (track?: Track) => {
     const state = get()
-    
+
     // If playing the same track, just resume
     if (!track && state.howl) {
       state.howl.play()
@@ -54,8 +72,6 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
       volume: state.volume,
       onplay: () => {
         set({ isPlaying: true, duration: howl.duration() })
-        
-        // Start progress tracker
         if (progressInterval) clearInterval(progressInterval)
         progressInterval = setInterval(() => {
           get()._updateProgress()
@@ -68,19 +84,21 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
       onend: () => {
         set({ isPlaying: false, progress: 0 })
         if (progressInterval) clearInterval(progressInterval)
+        // Fire the registered queue callback (e.g. advance to next track)
+        _onEndCallback?.()
       },
       onstop: () => {
         set({ isPlaying: false, progress: 0 })
         if (progressInterval) clearInterval(progressInterval)
       },
       onloaderror: () => {
-        console.error("Audio failed to load")
+        console.error('Audio failed to load')
         set({ isPlaying: false })
       },
       onplayerror: () => {
-        console.error("Audio failed to play")
+        console.error('Audio failed to play')
         howl.once('unlock', () => howl.play())
-      }
+      },
     })
 
     howl.play()
@@ -89,9 +107,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
 
   pause: () => {
     const { howl } = get()
-    if (howl) {
-      howl.pause()
-    }
+    if (howl) howl.pause()
   },
 
   stop: () => {
@@ -120,7 +136,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   _updateProgress: () => {
     const { howl, isPlaying } = get()
     if (howl && isPlaying) {
-      set({ progress: howl.seek() as number })
+      const pos = howl.seek()
+      if (typeof pos === 'number') {
+        set({ progress: pos })
+      }
     }
-  }
+  },
 }))

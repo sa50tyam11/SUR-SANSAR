@@ -9,6 +9,7 @@ import IndiaMap from '@/components/map/IndiaMap'
 import StatePanel from '@/components/panel/StatePanel'
 import AudioPlayer from '@/components/player/AudioPlayer'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Home() {
   const [states, setStates] = useState<State[]>([])
@@ -95,7 +96,9 @@ export default function Home() {
                 </div>
               )}
             </div>
-            <button className="hover:text-[#D6A95B] transition-colors duration-300">COMMUNITY</button>
+            <Link href="/community" className="hover:text-[#D6A95B] transition-colors duration-300">
+              COMMUNITY
+            </Link>
           </div>
         </div>
 

@@ -6,7 +6,12 @@
   --color-gold-600: #d97706;
   --color-background-dark: #0f172a; /* Slate 900 */
   --color-background-card: #1e293b; /* Slate 800 */
-  
+
+  /* ── Community Section tokens ───────────────────────────────────────────── */
+  --color-community-canvas:  #060B19; /* Deep blue canvas — page backgrounds   */
+  --color-community-gold:    #D4AF37; /* Antique gold — accents, icons, borders */
+  --color-community-crimson: #DC143C; /* Crimson red — CTAs, active states      */
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-playfair), ui-serif, Georgia, serif;
 }
@@ -19,3 +24,4 @@
     @apply bg-background-dark text-slate-200 font-sans;
   }
 }
+
