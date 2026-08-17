@@ -6,6 +6,7 @@ import StatePath from './StatePath'
 import { State } from '@/lib/supabase'
 import { Play } from 'lucide-react'
 import IndiaMapData from '@svg-maps/india'
+import Image from 'next/image'
 
 interface IndiaMapProps {
   states: State[]
@@ -117,14 +118,24 @@ export default function IndiaMap({ states, selectedStateId, onStateSelect }: Ind
             exit={{ opacity: 0, scale: 0.9, y: 10 }}
             className="fixed pointer-events-none z-50 w-72 p-3 bg-[#0a0a0a]/80 backdrop-blur-md border border-[#D6A95B]/30 rounded shadow-2xl flex gap-4 items-center"
             style={{
-              left: hoveredState.x + 20,
-              top: hoveredState.y - 40
+              left: typeof window !== 'undefined' && hoveredState.x + 320 > window.innerWidth 
+                ? hoveredState.x - 300 
+                : hoveredState.x + 20,
+              top: typeof window !== 'undefined' && hoveredState.y + 100 > window.innerHeight
+                ? hoveredState.y - 100
+                : hoveredState.y - 40
             }}
           >
             <div className="w-16 h-16 bg-black rounded-sm overflow-hidden shrink-0 border border-[#D6A95B]/20 relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#D6A95B]/30 to-black"></div>
+              <Image 
+                src={`/pattern_${getRegion(hoveredState.state.name_en)}.jpg`}
+                alt={hoveredState.state.name_en}
+                fill
+                className="object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-black/30"></div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <Play size={20} className="text-[#D6A95B]/60" />
+                <Play size={20} className="text-[#D6A95B] drop-shadow-md relative z-10" fill="currentColor" />
               </div>
             </div>
             <div className="flex flex-col flex-1">

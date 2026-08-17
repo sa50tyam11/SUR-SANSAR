@@ -6,10 +6,21 @@ import { X, Play, Pause, Music2 } from 'lucide-react'
 import { State, Track } from '@/lib/supabase'
 import { getTracksForState } from '@/lib/queries'
 import { usePlayerStore } from '@/store/usePlayerStore'
+import Image from 'next/image'
 
 interface StatePanelProps {
   state: State
   onClose: () => void
+}
+
+const getRegion = (stateName: string) => {
+  const name = stateName.toLowerCase()
+  if (["jammu", "kashmir", "ladakh", "himachal", "punjab", "uttarakhand", "haryana", "delhi", "uttar pradesh", "chandigarh"].some(n => name.includes(n))) return "north"
+  if (["andhra", "karnataka", "kerala", "tamil", "telangana", "puducherry", "lakshadweep", "andaman"].some(n => name.includes(n))) return "south"
+  if (["rajasthan", "gujarat", "maharashtra", "goa", "daman", "dadra"].some(n => name.includes(n))) return "west"
+  if (["bihar", "jharkhand", "bengal", "odisha"].some(n => name.includes(n))) return "east"
+  if (["madhya", "chhattisgarh"].some(n => name.includes(n))) return "central"
+  return "northeast"
 }
 
 export default function StatePanel({ state, onClose }: StatePanelProps) {
@@ -38,19 +49,30 @@ export default function StatePanel({ state, onClose }: StatePanelProps) {
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: '100%', opacity: 0 }}
       transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-      className="fixed inset-y-0 right-0 w-full md:w-96 bg-[#0a0a0a]/95 backdrop-blur-2xl border-l border-slate-800 shadow-2xl z-50 flex flex-col"
+      className="fixed inset-y-0 right-0 w-full md:w-96 bg-[#0a0a0a]/95 backdrop-blur-2xl border-l border-white/10 shadow-2xl z-50 flex flex-col"
     >
-      <div className="p-6 border-b border-slate-800/60 flex justify-between items-start bg-gradient-to-b from-black/60 to-transparent">
-        <div>
-          <h2 className="text-3xl font-display text-[#D6A95B] mb-1 drop-shadow-md">{state.name_en}</h2>
-          <p className="text-slate-400 font-sans text-lg">{state.name_hi}</p>
+      <div className="relative h-64 shrink-0 flex flex-col justify-end p-6 border-b border-white/10">
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src={`/pattern_${getRegion(state.name_en)}.jpg`}
+            alt={state.name_en}
+            fill
+            className="object-cover opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent"></div>
         </div>
+        
         <button 
           onClick={onClose}
-          className="p-2 text-slate-400 hover:text-white rounded-full hover:bg-slate-800 transition-colors"
+          className="absolute top-6 right-6 p-2 text-white hover:text-[#D6A95B] rounded-full bg-black/40 backdrop-blur-md transition-colors z-10 border border-white/10"
         >
           <X size={24} />
         </button>
+        
+        <div className="relative z-10">
+          <h2 className="text-4xl font-display text-white mb-1 drop-shadow-xl">{state.name_en}</h2>
+          <p className="text-[#D6A95B] font-sans text-xl tracking-wide font-medium">{state.name_hi}</p>
+        </div>
       </div>
 
       <div className="p-6 flex-1 overflow-y-auto custom-scrollbar pb-32">

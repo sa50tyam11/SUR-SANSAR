@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-export type Region = 'North' | 'South' | 'East' | 'West' | 'Northeast' | 'Central'
+export type Region = 'North' | 'South' | 'East' | 'West' | 'Northeast' | 'Central' | 'Unknown'
 export type LicenseType = 'CC-BY' | 'AI-Generated' | 'Licensed'
 
 export interface State {
