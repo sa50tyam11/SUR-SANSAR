@@ -1,0 +1,362 @@
+[
+  {
+    "id": "1",
+    "name_en": "Andaman and Nicobar Islands",
+    "name_hi": "Andaman and Nicobar Islands",
+    "slug": "andaman-and-nicobar-islands",
+    "region": "Unknown",
+    "svg_path_id": "an",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Andaman and Nicobar Islands."
+  },
+  {
+    "id": "2",
+    "name_en": "Andhra Pradesh",
+    "name_hi": "Andhra Pradesh",
+    "slug": "andhra-pradesh",
+    "region": "Unknown",
+    "svg_path_id": "ap",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Andhra Pradesh."
+  },
+  {
+    "id": "3",
+    "name_en": "Arunachal Pradesh",
+    "name_hi": "Arunachal Pradesh",
+    "slug": "arunachal-pradesh",
+    "region": "Unknown",
+    "svg_path_id": "ar",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Arunachal Pradesh."
+  },
+  {
+    "id": "4",
+    "name_en": "Assam",
+    "name_hi": "Assam",
+    "slug": "assam",
+    "region": "Unknown",
+    "svg_path_id": "as",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Assam."
+  },
+  {
+    "id": "5",
+    "name_en": "Bihar",
+    "name_hi": "Bihar",
+    "slug": "bihar",
+    "region": "Unknown",
+    "svg_path_id": "br",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Bihar."
+  },
+  {
+    "id": "6",
+    "name_en": "Chandigarh",
+    "name_hi": "Chandigarh",
+    "slug": "chandigarh",
+    "region": "Unknown",
+    "svg_path_id": "ch",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Chandigarh."
+  },
+  {
+    "id": "7",
+    "name_en": "Chhattisgarh",
+    "name_hi": "Chhattisgarh",
+    "slug": "chhattisgarh",
+    "region": "Unknown",
+    "svg_path_id": "ct",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Chhattisgarh."
+  },
+  {
+    "id": "8",
+    "name_en": "Dadra and Nagar Haveli",
+    "name_hi": "Dadra and Nagar Haveli",
+    "slug": "dadra-and-nagar-haveli",
+    "region": "Unknown",
+    "svg_path_id": "dn",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Dadra and Nagar Haveli."
+  },
+  {
+    "id": "9",
+    "name_en": "Daman and Diu",
+    "name_hi": "Daman and Diu",
+    "slug": "daman-and-diu",
+    "region": "Unknown",
+    "svg_path_id": "dd",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Daman and Diu."
+  },
+  {
+    "id": "10",
+    "name_en": "Delhi",
+    "name_hi": "Delhi",
+    "slug": "delhi",
+    "region": "Unknown",
+    "svg_path_id": "dl",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Delhi."
+  },
+  {
+    "id": "11",
+    "name_en": "Goa",
+    "name_hi": "Goa",
+    "slug": "goa",
+    "region": "Unknown",
+    "svg_path_id": "ga",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Goa."
+  },
+  {
+    "id": "12",
+    "name_en": "Gujarat",
+    "name_hi": "Gujarat",
+    "slug": "gujarat",
+    "region": "Unknown",
+    "svg_path_id": "gj",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Gujarat."
+  },
+  {
+    "id": "13",
+    "name_en": "Haryana",
+    "name_hi": "Haryana",
+    "slug": "haryana",
+    "region": "Unknown",
+    "svg_path_id": "hr",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Haryana."
+  },
+  {
+    "id": "14",
+    "name_en": "Himachal Pradesh",
+    "name_hi": "Himachal Pradesh",
+    "slug": "himachal-pradesh",
+    "region": "Unknown",
+    "svg_path_id": "hp",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Himachal Pradesh."
+  },
+  {
+    "id": "15",
+    "name_en": "Jammu and Kashmir",
+    "name_hi": "Jammu and Kashmir",
+    "slug": "jammu-and-kashmir",
+    "region": "Unknown",
+    "svg_path_id": "jk",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Jammu and Kashmir."
+  },
+  {
+    "id": "16",
+    "name_en": "Jharkhand",
+    "name_hi": "Jharkhand",
+    "slug": "jharkhand",
+    "region": "Unknown",
+    "svg_path_id": "jh",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Jharkhand."
+  },
+  {
+    "id": "17",
+    "name_en": "Karnataka",
+    "name_hi": "Karnataka",
+    "slug": "karnataka",
+    "region": "Unknown",
+    "svg_path_id": "ka",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Karnataka."
+  },
+  {
+    "id": "18",
+    "name_en": "Kerala",
+    "name_hi": "Kerala",
+    "slug": "kerala",
+    "region": "Unknown",
+    "svg_path_id": "kl",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Kerala."
+  },
+  {
+    "id": "19",
+    "name_en": "Lakshadweep",
+    "name_hi": "Lakshadweep",
+    "slug": "lakshadweep",
+    "region": "Unknown",
+    "svg_path_id": "ld",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Lakshadweep."
+  },
+  {
+    "id": "20",
+    "name_en": "Madhya Pradesh",
+    "name_hi": "Madhya Pradesh",
+    "slug": "madhya-pradesh",
+    "region": "Unknown",
+    "svg_path_id": "mp",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Madhya Pradesh."
+  },
+  {
+    "id": "21",
+    "name_en": "Maharashtra",
+    "name_hi": "Maharashtra",
+    "slug": "maharashtra",
+    "region": "Unknown",
+    "svg_path_id": "mh",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Maharashtra."
+  },
+  {
+    "id": "22",
+    "name_en": "Manipur",
+    "name_hi": "Manipur",
+    "slug": "manipur",
+    "region": "Unknown",
+    "svg_path_id": "mn",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Manipur."
+  },
+  {
+    "id": "23",
+    "name_en": "Meghalaya",
+    "name_hi": "Meghalaya",
+    "slug": "meghalaya",
+    "region": "Unknown",
+    "svg_path_id": "ml",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Meghalaya."
+  },
+  {
+    "id": "24",
+    "name_en": "Mizoram",
+    "name_hi": "Mizoram",
+    "slug": "mizoram",
+    "region": "Unknown",
+    "svg_path_id": "mz",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Mizoram."
+  },
+  {
+    "id": "25",
+    "name_en": "Nagaland",
+    "name_hi": "Nagaland",
+    "slug": "nagaland",
+    "region": "Unknown",
+    "svg_path_id": "nl",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Nagaland."
+  },
+  {
+    "id": "26",
+    "name_en": "Odisha",
+    "name_hi": "Odisha",
+    "slug": "odisha",
+    "region": "Unknown",
+    "svg_path_id": "or",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Odisha."
+  },
+  {
+    "id": "27",
+    "name_en": "Puducherry",
+    "name_hi": "Puducherry",
+    "slug": "puducherry",
+    "region": "Unknown",
+    "svg_path_id": "py",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Puducherry."
+  },
+  {
+    "id": "28",
+    "name_en": "Punjab",
+    "name_hi": "Punjab",
+    "slug": "punjab",
+    "region": "Unknown",
+    "svg_path_id": "pb",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Punjab."
+  },
+  {
+    "id": "29",
+    "name_en": "Rajasthan",
+    "name_hi": "Rajasthan",
+    "slug": "rajasthan",
+    "region": "Unknown",
+    "svg_path_id": "rj",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Rajasthan."
+  },
+  {
+    "id": "30",
+    "name_en": "Sikkim",
+    "name_hi": "Sikkim",
+    "slug": "sikkim",
+    "region": "Unknown",
+    "svg_path_id": "sk",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Sikkim."
+  },
+  {
+    "id": "31",
+    "name_en": "Tamil Nadu",
+    "name_hi": "Tamil Nadu",
+    "slug": "tamil-nadu",
+    "region": "Unknown",
+    "svg_path_id": "tn",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Tamil Nadu."
+  },
+  {
+    "id": "32",
+    "name_en": "Telangana",
+    "name_hi": "Telangana",
+    "slug": "telangana",
+    "region": "Unknown",
+    "svg_path_id": "tg",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Telangana."
+  },
+  {
+    "id": "33",
+    "name_en": "Tripura",
+    "name_hi": "Tripura",
+    "slug": "tripura",
+    "region": "Unknown",
+    "svg_path_id": "tr",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Tripura."
+  },
+  {
+    "id": "34",
+    "name_en": "Uttar Pradesh",
+    "name_hi": "Uttar Pradesh",
+    "slug": "uttar-pradesh",
+    "region": "Unknown",
+    "svg_path_id": "up",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Uttar Pradesh."
+  },
+  {
+    "id": "35",
+    "name_en": "Uttarakhand",
+    "name_hi": "Uttarakhand",
+    "slug": "uttarakhand",
+    "region": "Unknown",
+    "svg_path_id": "ut",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of Uttarakhand."
+  },
+  {
+    "id": "36",
+    "name_en": "West Bengal",
+    "name_hi": "West Bengal",
+    "slug": "west-bengal",
+    "region": "Unknown",
+    "svg_path_id": "wb",
+    "cover_image_url": null,
+    "description": "Explore the rich folk music of West Bengal."
+  }
+]
