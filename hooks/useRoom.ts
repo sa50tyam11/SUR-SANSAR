@@ -31,6 +31,7 @@ export function useRoom(roomId: string) {
 
   useEffect(() => {
     if (!user || !roomId) return;
+    if (!supabase) return; // Supabase not configured
 
     // Initialize the channel
     const roomChannel = supabase.channel(`room:${roomId}`, {

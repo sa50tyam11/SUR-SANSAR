@@ -1,4 +1,4 @@
-import { supabase, type State, type Track } from './supabase'
+import { supabase, isSupabaseConfigured, type State, type Track, type UnifiedTrack, type StateMusicLink } from './supabase'
 
 const dummyStates: State[] = [
   {
@@ -729,21 +729,156 @@ const dummyTracks: Record<string, Track[]> = {
   ]
 }
 
+// ─── Query helpers ────────────────────────────────────────────────────────────
+
+/**
+ * Adapts a local dummy Track to UnifiedTrack shape.
+ */
+function trackToUnified(t: Track, stateId: string): UnifiedTrack {
+  return {
+    id: t.id,
+    state_id: stateId,
+    title: t.title,
+    artist: t.artist,
+    instrument_type: t.instrument_type,
+    audio_url: t.audio_url,
+    duration_seconds: t.duration_seconds,
+    license_type: t.license_type,
+    play_count: t.play_count,
+    created_at: t.created_at,
+    source: 'local',
+    is_active: true,
+  }
+}
+
+/**
+ * Adapts a StateMusicLink row to UnifiedTrack shape.
+ */
+function linkToUnified(link: StateMusicLink, stateId: string): UnifiedTrack {
+  return {
+    id: link.id,
+    state_id: stateId,
+    title: link.track_title,
+    artist: link.artist,
+    instrument_type: null,
+    audio_url: link.stream_url,
+    duration_seconds: link.duration_seconds,
+    license_type: link.license_type,
+    play_count: 0,
+    created_at: link.created_at,
+    source: link.source,
+    is_active: link.is_active,
+  }
+}
+
+// ─── Exported query functions ─────────────────────────────────────────────────
+
 export async function getAllStates(): Promise<State[]> {
-  // Use dummy data for Step 1
+  if (isSupabaseConfigured && supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('states')
+        .select('*')
+        .order('name_en')
+      if (!error && data && data.length > 0) return data as State[]
+    } catch {
+      // Fall through to dummy data
+    }
+  }
   return Promise.resolve(dummyStates)
 }
 
 export async function getStateBySlug(slug: string): Promise<State | null> {
+  if (isSupabaseConfigured && supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('states')
+        .select('*')
+        .eq('slug', slug)
+        .single()
+      if (!error && data) return data as State
+    } catch {
+      // Fall through to dummy data
+    }
+  }
   const state = dummyStates.find(s => s.slug === slug)
   return Promise.resolve(state || null)
 }
 
-export async function getTracksForState(stateId: string): Promise<Track[]> {
-  // Simulate network delay
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(dummyTracks[stateId] || [])
-    }, 500)
-  })
+/**
+ * Fetches tracks for a state.
+ * - First page (offset=0): returns local dummy tracks + first 10 Supabase links
+ * - Subsequent pages: returns next batch of Supabase links only
+ * @param stateId   The state's ID (e.g. "29" for Rajasthan)
+ * @param offset    Pagination offset for state_music_links (default 0)
+ * @param pageSize  Number of Supabase links to fetch per page (default 10)
+ */
+export async function getTracksForState(
+  stateId: string,
+  offset = 0,
+  pageSize = 10
+): Promise<UnifiedTrack[]> {
+  // Find the state to get its English name for Supabase lookup
+  const state = dummyStates.find(s => s.id === stateId)
+  const stateName = state?.name_en ?? ''
+
+  // Local dummy tracks (only on first page)
+  const localTracks: UnifiedTrack[] = offset === 0
+    ? (dummyTracks[stateId] || []).map(t => trackToUnified(t, stateId))
+    : []
+
+  // Early return with local tracks only if no state name found (prevents empty Supabase query)
+  if (!stateName) return localTracks
+
+  // Supabase tracks
+  let supabaseTracks: UnifiedTrack[] = []
+  if (isSupabaseConfigured && supabase && stateName) {
+    try {
+      const { data, error } = await supabase
+        .from('state_music_links')
+        .select('*')
+        .eq('state_name', stateName)
+        .eq('is_active', true)
+        .order('created_at', { ascending: false })
+        .range(offset, offset + pageSize - 1)
+
+      if (!error && data) {
+        supabaseTracks = (data as StateMusicLink[]).map(link => linkToUnified(link, stateId))
+      }
+    } catch {
+      // Supabase unavailable — local data only
+    }
+  }
+
+  return [...localTracks, ...supabaseTracks]
+}
+
+/**
+ * Lazy-loads the next batch of tracks for a state from Supabase.
+ * Called when the user reaches the Nth track in the playlist.
+ */
+export async function getMoreTracksForState(
+  stateId: string,
+  offset: number,
+  pageSize = 10
+): Promise<UnifiedTrack[]> {
+  return getTracksForState(stateId, offset, pageSize)
+}
+
+/**
+ * Marks a stream URL as inactive in the Supabase database.
+ * Called when a track fails to load (404 / CORS error).
+ */
+export async function markTrackInactive(streamUrl: string): Promise<void> {
+  if (!isSupabaseConfigured || !supabase) return
+  try {
+    // Cast to any: state_music_links has no generated TS types yet (run `supabase gen types` to fix)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const db = supabase as any
+    const { error } = await db.from('state_music_links').update({ is_active: false }).eq('stream_url', streamUrl)
+    if (error) console.warn('[Sur Sansar] markTrackInactive error:', error.message)
+  } catch (err) {
+    // Best-effort — log but don't throw
+    console.warn('[Sur Sansar] markTrackInactive failed:', err)
+  }
 }

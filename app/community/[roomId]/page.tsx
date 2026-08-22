@@ -18,6 +18,9 @@ import { useQueueSync } from '@/hooks/useQueueSync'
 import { usePlayerStore } from '@/store/usePlayerStore'
 import { getAllStates, getTracksForState } from '@/lib/queries'
 import { Track, State } from '@/lib/supabase'
+import type { UnifiedTrack } from '@/lib/supabase'
+// UnifiedTrack is the type returned by getTracksForState; Track is the legacy type used by community hooks
+
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const formatTime = (s: number) => {
@@ -227,8 +230,8 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
     return (
       <main className="relative h-screen bg-community-canvas overflow-hidden flex flex-col items-center justify-center gap-6">
         <div className="absolute inset-0 z-0">
-          <Image src="/bg-warm-sunset.jpg" alt="bg" fill className="object-cover opacity-10" />
-          <div className="absolute inset-0 bg-community-canvas/90" />
+          <Image src="/bg-cinematic-v2.jpg" alt="bg" fill className="object-cover opacity-20" />
+          <div className="absolute inset-0 bg-black/80" />
         </div>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -242,10 +245,10 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
           <p className="text-slate-400 text-sm mb-8">The host left and the session has closed.</p>
           <Link
             href="/community"
-            className="inline-flex items-center gap-2 bg-community-crimson text-white font-semibold text-sm px-6 py-3 rounded-lg hover:brightness-110 transition-all shadow-[0_4px_20px_rgba(220,20,60,0.35)]"
+            className="inline-flex items-center gap-2 bg-[#D6A95B] text-slate-900 font-semibold text-xs tracking-widest px-6 py-3 rounded-sm hover:brightness-110 transition-all shadow-xl"
           >
             <ArrowLeft size={16} />
-            Back to Community
+            BACK TO COMMUNITY
           </Link>
         </motion.div>
       </main>
@@ -255,11 +258,11 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
   return (
     <main className="relative h-screen bg-community-canvas overflow-hidden flex flex-col">
 
-      {/* Background */}
+      {/* Cinematic Background (Matches Home Page) */}
       <div className="absolute inset-0 z-0">
-        <Image src="/bg-warm-sunset.jpg" alt="Room background" fill priority className="object-cover object-center opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-r from-community-canvas/95 via-community-canvas/70 to-community-canvas/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-community-canvas via-transparent to-community-canvas/80" />
+        <Image src="/bg-cinematic-v2.jpg" alt="Room background" fill priority className="object-cover object-center opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/80" />
       </div>
 
       {/* ── Toast notifications ──────────────────────────────────────────────── */}
@@ -278,7 +281,7 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
       </AnimatePresence>
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
-      <header className="relative z-50 px-6 md:px-10 py-4 flex items-center justify-between bg-community-canvas/70 backdrop-blur-md border-b border-white/10 shadow-2xl shrink-0">
+      <header className="relative z-50 px-6 md:px-10 py-4 flex items-center justify-between bg-black/40 backdrop-blur-md border-b border-white/10 shadow-2xl shrink-0">
         <div className="flex items-center gap-4">
           <Link href="/community" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
             <ArrowLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
@@ -310,12 +313,12 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
         <div className="flex items-center gap-3">
           <button
             onClick={copyInviteLink}
-            className="flex items-center gap-2 bg-community-canvas/60 hover:bg-community-canvas border border-white/10 hover:border-community-gold/30 text-slate-200 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-lg transition-all"
+            className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-sm transition-all shadow-md"
           >
             {copied ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
             <span className="hidden sm:block">{copied ? 'Copied!' : 'Invite'}</span>
           </button>
-          <div className="flex items-center gap-1.5 bg-community-canvas/60 border border-white/10 px-3 py-2 rounded-lg">
+          <div className="flex items-center gap-1.5 bg-black/40 border border-white/10 px-3 py-2 rounded-sm shadow-inner">
             <Users size={14} className="text-community-gold" />
             <span className="text-slate-200 text-xs font-semibold">{users.length}</span>
           </div>
@@ -391,14 +394,14 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
                   onClick={isHost ? handleTogglePlayPause : undefined}
                   disabled={!isHost}
                   title={!isHost ? 'Only the host can control playback' : undefined}
-                  className={`w-14 h-14 flex items-center justify-center rounded-full transition-all
+                  className={`w-14 h-14 flex items-center justify-center rounded-full transition-all shadow-xl
                     ${isHost
-                      ? 'bg-community-crimson text-white hover:scale-105 hover:brightness-110 shadow-[0_4px_20px_rgba(220,20,60,0.35)]'
+                      ? 'bg-[#D6A95B] text-slate-900 hover:scale-105 hover:brightness-110'
                       : 'bg-slate-800 text-slate-600 cursor-not-allowed'}`}
                 >
                   {activeIsPlaying
-                    ? <Pause size={26} className={isHost ? 'fill-white' : 'fill-slate-600'} />
-                    : <Play size={26} className={`${isHost ? 'fill-white' : 'fill-slate-600'} ml-1`} />}
+                    ? <Pause size={26} className={isHost ? 'fill-slate-900' : 'fill-slate-600'} />
+                    : <Play size={26} className={`${isHost ? 'fill-slate-900' : 'fill-slate-600'} ml-1`} />}
                 </button>
 
                 {/* Skip Forward — now wired to queue */}
@@ -444,7 +447,7 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
           </div>
 
           {/* ── Track Browser (bottom of left panel) ──────────────────────── */}
-          <div className="border-t border-white/10 bg-community-canvas/70 backdrop-blur-sm shrink-0">
+          <div className="border-t border-white/10 bg-black/40 backdrop-blur-md shrink-0">
             {/* Browser toggle header */}
             <button
               onClick={() => setBrowserOpen(v => !v)}
@@ -473,7 +476,7 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
                     <select
                       value={selectedStateId}
                       onChange={e => setSelectedStateId(e.target.value)}
-                      className="w-full bg-community-canvas/60 border border-white/10 text-slate-300 text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-community-gold/50"
+                      className="w-full bg-black/50 border border-white/10 text-slate-300 text-xs rounded-sm px-3 py-2 focus:outline-none focus:border-[#D6A95B]/50"
                     >
                       <option value="">Select a state to browse…</option>
                       {states.map(s => <option key={s.id} value={s.id}>{s.name_en}</option>)}
@@ -515,7 +518,7 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
           initial={{ x: '100%', opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ type: 'spring', damping: 25, stiffness: 200, delay: 0.15 }}
-          className="w-72 hidden lg:flex flex-col bg-community-canvas/90 backdrop-blur-xl border-l border-white/10"
+          className="w-72 hidden lg:flex flex-col bg-black/40 backdrop-blur-md border-l border-white/10"
         >
           {/* Tab bar */}
           <div className="flex border-b border-white/10 shrink-0">
@@ -617,10 +620,10 @@ export default function RoomPage({ params }: { params: Promise<{ roomId: string 
           <div className="p-4 border-t border-white/10 shrink-0">
             <button
               onClick={handleLeaveRoom}
-              className="w-full flex items-center justify-center gap-2 bg-community-canvas/60 hover:bg-community-canvas border border-white/10 hover:border-community-crimson/30 text-slate-400 hover:text-community-crimson text-xs font-semibold tracking-widest uppercase py-3 rounded-lg transition-all"
+              className="w-full flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-500/50 text-slate-300 hover:text-red-400 text-xs font-semibold tracking-widest uppercase py-3 rounded-sm transition-all"
             >
               <X size={14} />
-              Leave Room
+              LEAVE ROOM
             </button>
           </div>
         </motion.div>

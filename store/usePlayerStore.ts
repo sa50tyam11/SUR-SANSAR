@@ -1,36 +1,76 @@
 import { create } from 'zustand'
 import { Howl, Howler } from 'howler'
-import { Track } from '@/lib/supabase'
+import { UnifiedTrack } from '@/lib/supabase'
+
+// Re-export so consumers can import from one place
+export type { UnifiedTrack }
+// Backward compat alias
+export type Track = UnifiedTrack
 
 interface PlayerState {
-  currentTrack: Track | null
+  currentTrack: UnifiedTrack | null
   isPlaying: boolean
   volume: number
   progress: number
   duration: number
   howl: Howl | null
 
-  // Actions
-  play: (track?: Track) => void
+  /** Ordered playlist for the currently-selected state */
+  playlist: UnifiedTrack[]
+  /** Index of the current track within playlist (-1 if not in playlist) */
+  currentIndex: number
+
+  // ── Playback actions ──────────────────────────────────────────────────────
+  play: (track?: UnifiedTrack) => void
   pause: () => void
   stop: () => void
   seek: (time: number) => void
   setVolume: (volume: number) => void
   _updateProgress: () => void
 
+  // ── Playlist actions ──────────────────────────────────────────────────────
+  /**
+   * Load a full playlist and optionally start playing from a given index.
+   * Replaces any existing playlist for the state.
+   */
+  setPlaylist: (tracks: UnifiedTrack[], startIndex?: number) => void
+
+  /** Append more tracks to the existing playlist (lazy loading). */
+  appendToPlaylist: (tracks: UnifiedTrack[]) => void
+
+  /** Play the next track. Wraps at end of playlist. */
+  playNext: () => void
+
+  /** Play the previous track. Wraps at start of playlist. */
+  playPrev: () => void
+
   /**
    * Register a callback to fire when the current track naturally ends.
-   * Only one callback is supported at a time (last registration wins).
+   * Only one callback supported at a time (last registration wins).
    * Returns an unregister function.
    */
   registerOnEnd: (cb: () => void) => () => void
+
+  /**
+   * Register a callback that fires when the player is about to run out of
+   * tracks (triggered when currentIndex reaches playlist.length - 3).
+   * Use this to lazy-load more tracks from the server.
+   */
+  registerOnNeedMoreTracks: (cb: () => void) => () => void
+
+  /**
+   * Called when a track fails to load.
+   * Marks it inactive externally and skips to next.
+   */
+  markCurrentTrackFailed: () => void
 }
 
 let progressInterval: NodeJS.Timeout | null = null
 
-// Module-level callback ref — survives Zustand state updates without
+// Module-level callback refs — survive Zustand state updates without
 // causing re-subscriptions or stale-closure issues inside the Howl instance.
 let _onEndCallback: (() => void) | null = null
+let _onNeedMoreTracksCallback: (() => void) | null = null
 
 export const usePlayerStore = create<PlayerState>((set, get) => ({
   currentTrack: null,
@@ -39,6 +79,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   progress: 0,
   duration: 0,
   howl: null,
+  playlist: [],
+  currentIndex: -1,
 
   registerOnEnd: (cb: () => void) => {
     _onEndCallback = cb
@@ -47,17 +89,67 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     }
   },
 
-  play: (track?: Track) => {
+  registerOnNeedMoreTracks: (cb: () => void) => {
+    _onNeedMoreTracksCallback = cb
+    return () => {
+      if (_onNeedMoreTracksCallback === cb) _onNeedMoreTracksCallback = null
+    }
+  },
+
+  setPlaylist: (tracks: UnifiedTrack[], startIndex = 0) => {
+    set({ playlist: tracks, currentIndex: startIndex })
+    if (tracks.length > 0 && startIndex >= 0 && startIndex < tracks.length) {
+      get().play(tracks[startIndex])
+    }
+  },
+
+  appendToPlaylist: (tracks: UnifiedTrack[]) => {
+    const { playlist } = get()
+    // Dedupe by id
+    const existingIds = new Set(playlist.map(t => t.id))
+    const newTracks = tracks.filter(t => !existingIds.has(t.id))
+    if (newTracks.length > 0) {
+      set({ playlist: [...playlist, ...newTracks] })
+    }
+  },
+
+  playNext: () => {
+    const { playlist, currentIndex } = get()
+    if (playlist.length === 0) return
+    const nextIndex = (currentIndex + 1) % playlist.length
+    set({ currentIndex: nextIndex })
+    get().play(playlist[nextIndex])
+
+    // Fire "need more tracks" when we're 3 tracks from the end
+    if (nextIndex >= playlist.length - 3) {
+      _onNeedMoreTracksCallback?.()
+    }
+  },
+
+  playPrev: () => {
+    const { playlist, currentIndex } = get()
+    if (playlist.length === 0) return
+    const prevIndex = currentIndex <= 0 ? playlist.length - 1 : currentIndex - 1
+    set({ currentIndex: prevIndex })
+    get().play(playlist[prevIndex])
+  },
+
+  markCurrentTrackFailed: () => {
+    // Skip to next — the component layer handles marking DB inactive
+    get().playNext()
+  },
+
+  play: (track?: UnifiedTrack) => {
     const state = get()
 
-    // If playing the same track, just resume
+    // Resume same track
     if (!track && state.howl) {
       state.howl.play()
       set({ isPlaying: true })
       return
     }
 
-    // If there's an existing track playing, stop it
+    // Stop existing Howl
     if (state.howl) {
       state.howl.stop()
       state.howl.unload()
@@ -65,13 +157,30 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
 
     if (!track) return
 
-    // Create new Howl instance
+    // Update currentIndex if this track is in the playlist
+    const { playlist } = get()
+    const idx = playlist.findIndex(t => t.id === track.id)
+    if (idx !== -1) {
+      set({ currentIndex: idx })
+      // Fire "need more tracks" when approaching end
+      if (idx >= playlist.length - 3) {
+        _onNeedMoreTracksCallback?.()
+      }
+    }
+
     const howl = new Howl({
       src: [track.audio_url],
-      html5: true, // Force HTML5 audio to allow streaming and avoid CORS issues with big files
+      html5: true, // Force HTML5 audio for streaming + CORS support
       volume: state.volume,
+      format: (() => {
+        const url = track.audio_url.toLowerCase()
+        if (url.endsWith('.ogg') || url.includes('.ogg?')) return ['ogg']
+        if (url.endsWith('.wav') || url.includes('.wav?')) return ['wav']
+        if (url.endsWith('.flac') || url.includes('.flac?')) return ['flac']
+        return ['mp3'] // Default — also works for ambiguous IA stream URLs
+      })(),
       onplay: () => {
-        set({ isPlaying: true, duration: howl.duration() })
+        set({ isPlaying: true, duration: howl.duration() || track.duration_seconds || 0 })
         if (progressInterval) clearInterval(progressInterval)
         progressInterval = setInterval(() => {
           get()._updateProgress()
@@ -84,25 +193,38 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
       onend: () => {
         set({ isPlaying: false, progress: 0 })
         if (progressInterval) clearInterval(progressInterval)
-        // Fire the registered queue callback (e.g. advance to next track)
-        _onEndCallback?.()
+        // Auto-advance via registered callback (queue manager), or advance playlist directly
+        if (_onEndCallback) {
+          _onEndCallback()
+        } else {
+          get().playNext()
+        }
       },
       onstop: () => {
         set({ isPlaying: false, progress: 0 })
         if (progressInterval) clearInterval(progressInterval)
       },
       onloaderror: () => {
-        console.error('Audio failed to load')
+        console.warn('[Sur Sansar] Audio failed to load:', track.audio_url)
+        // Clear the progress interval before advancing to prevent zombie intervals
+        if (progressInterval) clearInterval(progressInterval)
         set({ isPlaying: false })
+        get().markCurrentTrackFailed()
       },
       onplayerror: () => {
-        console.error('Audio failed to play')
+        console.warn('[Sur Sansar] Audio failed to play:', track.audio_url)
         howl.once('unlock', () => howl.play())
       },
     })
 
     howl.play()
-    set({ currentTrack: track, howl, isPlaying: true, progress: 0, duration: track.duration_seconds || 0 })
+    set({
+      currentTrack: track,
+      howl,
+      isPlaying: true,
+      progress: 0,
+      duration: track.duration_seconds || 0,
+    })
   },
 
   pause: () => {
@@ -117,7 +239,15 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
       howl.unload()
     }
     if (progressInterval) clearInterval(progressInterval)
-    set({ currentTrack: null, isPlaying: false, progress: 0, duration: 0, howl: null })
+    set({
+      currentTrack: null,
+      isPlaying: false,
+      progress: 0,
+      duration: 0,
+      howl: null,
+      playlist: [],
+      currentIndex: -1,
+    })
   },
 
   seek: (time: number) => {

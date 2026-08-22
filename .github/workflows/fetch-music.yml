@@ -1,0 +1,45 @@
+name: Fetch Indian Folk Music
+
+on:
+  schedule:
+    # Every Sunday at midnight UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub Actions UI
+    inputs:
+      dry_run:
+        description: 'Dry run (fetch but do not insert into Supabase)'
+        required: false
+        default: 'false'
+
+jobs:
+  fetch-music:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch and upsert music links
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: python scripts/fetch_music.py
+
+      - name: Upload fetch report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fetch-report-${{ github.run_id }}
+          path: fetch_report.json
+          retention-days: 30

@@ -73,52 +73,52 @@ function AuthGate() {
         <div className="h-px w-16 bg-gradient-to-l from-transparent to-community-gold/60" />
       </div>
 
-      <div className="bg-community-canvas/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-[0_10px_40px_rgba(212,175,55,0.08)] p-8">
+      <div className="bg-black/30 backdrop-blur-md border border-white/10 rounded-sm shadow-2xl p-8">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-community-gold/10 border border-community-gold/20 mb-4">
-            <Users size={26} className="text-community-gold" />
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#D6A95B]/10 border border-[#D6A95B]/20 mb-4">
+            <Users size={26} className="text-[#D6A95B]" />
           </div>
-          <h2 className="text-2xl font-display text-white mb-2">Community Hub</h2>
-          <p className="text-slate-400 text-sm leading-relaxed">
+          <h2 className="text-3xl font-[family-name:var(--font-great-vibes)] text-slate-100 mb-2">Community Hub</h2>
+          <p className="text-slate-200 text-sm font-light leading-relaxed">
             Listen to the music of India with friends,<br />in real-time, together.
           </p>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-4">
           {/* Google Sign-In */}
           <button
             onClick={signInWithGoogle}
             disabled={isLoading}
-            className="w-full flex items-center justify-center gap-3 bg-white hover:bg-slate-100 text-slate-900 font-semibold py-3 px-4 rounded-lg transition-colors text-sm disabled:opacity-60"
+            className="w-full flex items-center justify-center gap-3 bg-white hover:bg-slate-100 text-slate-900 font-semibold py-3 px-6 rounded-sm transition-colors text-xs tracking-widest disabled:opacity-60 shadow-md"
           >
             {isLoading ? (
-              <Loader2 size={18} className="animate-spin" />
+              <Loader2 size={16} className="animate-spin" />
             ) : (
-              <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                 <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
                 <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
                 <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
               </svg>
             )}
-            Continue with Google
+            CONTINUE WITH GOOGLE
           </button>
 
           {/* Divider */}
           <div className="flex items-center gap-4 py-1">
-            <div className="flex-1 h-px bg-white/10" />
-            <span className="text-slate-500 text-xs tracking-widest font-medium uppercase">or</span>
-            <div className="flex-1 h-px bg-white/10" />
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#D6A95B]/40" />
+            <span className="text-[#D6A95B] text-[10px] tracking-widest font-medium uppercase">or</span>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#D6A95B]/40" />
           </div>
 
-          {/* Guest — uses crimson as secondary CTA */}
+          {/* Guest CTA */}
           <button
             onClick={signInAsGuest}
             disabled={isLoading}
-            className="w-full flex items-center justify-center gap-3 bg-community-crimson/10 hover:bg-community-crimson/20 border border-community-crimson/30 hover:border-community-crimson/60 text-slate-200 font-semibold py-3 px-4 rounded-lg transition-all text-sm disabled:opacity-60"
+            className="w-full flex items-center justify-center gap-3 bg-[#D6A95B] hover:brightness-110 text-slate-900 font-semibold py-3 px-6 rounded-sm transition-all text-xs tracking-widest disabled:opacity-60 shadow-xl cursor-pointer"
           >
-            <UserCircle2 size={18} className="text-community-crimson" />
-            Join as Guest
+            <UserCircle2 size={16} />
+            JOIN AS GUEST
           </button>
         </div>
       </div>
@@ -172,18 +172,18 @@ function CommunityDashboard() {
         <div className="h-px w-16 bg-gradient-to-l from-transparent to-community-gold/60" />
       </div>
 
-      <div className="bg-community-canvas/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl shadow-[0_10px_40px_rgba(212,175,55,0.08)] overflow-hidden">
+      <div className="bg-black/30 backdrop-blur-md border border-white/10 rounded-sm shadow-2xl overflow-hidden">
 
         {/* Header strip */}
-        <div className="px-8 pt-8 pb-6 border-b border-white/10">
+        <div className="px-8 pt-6 pb-5 border-b border-white/10">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-[#94a3b8] text-[0.65rem] font-sans tracking-[0.25em] uppercase mb-1">Signed in as</p>
-              <p className="text-white font-medium text-sm truncate max-w-[220px]">{displayName}</p>
+              <p className="text-slate-100 font-medium text-sm truncate max-w-[220px]">{displayName}</p>
             </div>
             <button
               onClick={signOut}
-              className="text-xs font-semibold tracking-widest text-slate-400 hover:text-community-gold transition-colors uppercase"
+              className="text-[10px] font-semibold tracking-widest text-slate-400 hover:text-white transition-colors uppercase"
             >
               Sign out
             </button>
@@ -192,11 +192,11 @@ function CommunityDashboard() {
 
         <div className="px-8 py-8 space-y-8">
 
-          {/* Create Room — PRIMARY CTA: crimson */}
+          {/* Create Room */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <Music2 size={16} className="text-community-gold" />
-              <h3 className="text-sm font-semibold tracking-widest text-slate-200 uppercase">
+              <Music2 size={16} className="text-[#D6A95B]" />
+              <h3 className="text-xs font-semibold tracking-widest text-slate-200 uppercase">
                 Start a Session
               </h3>
             </div>
@@ -204,40 +204,33 @@ function CommunityDashboard() {
             <button
               onClick={handleCreateRoom}
               disabled={isCreating}
-              className="w-full flex items-center justify-center gap-3 bg-community-crimson hover:brightness-110 text-white font-semibold py-3.5 px-6 rounded-lg transition-all text-sm shadow-[0_4px_20px_rgba(220,20,60,0.30)] hover:shadow-[0_4px_28px_rgba(220,20,60,0.50)] disabled:opacity-70 group"
+              className="w-full flex items-center justify-center gap-3 bg-[#D6A95B] hover:brightness-110 text-slate-900 font-semibold py-3 px-6 rounded-sm transition-all shadow-xl disabled:opacity-70 text-xs tracking-widest cursor-pointer group"
             >
               {isCreating ? (
-                <Loader2 size={18} className="animate-spin" />
+                <Loader2 size={16} className="animate-spin" />
               ) : (
                 <>
-                  <Users size={18} />
-                  Create New Room
+                  <Users size={16} />
+                  CREATE NEW ROOM
                   <ArrowRight size={16} className="ml-auto group-hover:translate-x-1 transition-transform" />
                 </>
               )}
             </button>
 
-            <p className="text-slate-500 text-xs mt-3 text-center leading-relaxed">
+            <p className="text-slate-400 text-xs mt-4 leading-relaxed font-light">
               A unique invite code is auto-generated. Share it with friends to listen together.
             </p>
           </div>
 
           {/* Divider */}
           <div className="flex items-center gap-4">
-            <div className="flex-1 h-px bg-white/10" />
-            <span className="text-slate-500 text-xs tracking-widest font-medium uppercase">or join one</span>
-            <div className="flex-1 h-px bg-white/10" />
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#D6A95B]/40" />
+            <span className="text-[#D6A95B] text-[10px] tracking-widest font-medium uppercase">or join one</span>
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#D6A95B]/40" />
           </div>
 
           {/* Join Room */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <LogIn size={16} className="text-community-gold" />
-              <h3 className="text-sm font-semibold tracking-widest text-slate-200 uppercase">
-                Join a Room
-              </h3>
-            </div>
-
             <div className="flex gap-2">
               <input
                 type="text"
@@ -247,16 +240,16 @@ function CommunityDashboard() {
                   setJoinError('')
                 }}
                 onKeyDown={(e) => e.key === 'Enter' && handleJoinRoom()}
-                placeholder="Enter room code..."
+                placeholder="ENTER CODE"
                 maxLength={8}
-                className="flex-1 bg-white/5 border border-white/10 focus:border-community-gold/50 focus:outline-none rounded-lg py-3 px-4 text-slate-200 placeholder:text-slate-600 text-sm font-mono tracking-widest transition-colors"
+                className="flex-1 bg-black/40 border border-white/10 focus:border-[#D6A95B]/50 focus:outline-none rounded-sm py-3 px-4 text-slate-200 placeholder:text-slate-500 text-xs tracking-widest font-mono transition-colors"
               />
               <button
                 onClick={handleJoinRoom}
                 disabled={!joinCode.trim()}
-                className="px-5 py-3 bg-community-gold/10 hover:bg-community-gold/20 border border-community-gold/30 hover:border-community-gold/60 text-community-gold font-semibold rounded-lg transition-all text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+                className="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 font-semibold rounded-sm transition-all text-xs tracking-widest disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Join
+                JOIN
               </button>
             </div>
 
@@ -290,17 +283,18 @@ export default function CommunityPage() {
   return (
     <main className="relative h-screen bg-community-canvas overflow-hidden flex flex-col">
 
-      {/* Background */}
+      {/* Cinematic Background (Matches Home Page) */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/bg-warm-sunset.jpg"
+          src="/bg-cinematic-v2.jpg"
           alt="Community background"
           fill
           priority
-          className="object-cover object-center opacity-25"
+          className="object-cover object-center opacity-80"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-community-canvas/95 via-community-canvas/70 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-community-canvas via-transparent to-community-canvas/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/90 via-transparent to-transparent"></div>
       </div>
 
       {/* Header */}
@@ -343,20 +337,19 @@ export default function CommunityPage() {
       {/* Central content */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-32">
 
-        {/* Page title */}
+        {/* Page title (Matches Home Page Text Aesthetics) */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="text-center mb-10"
+          className="text-center mb-12"
         >
           <h1
-            className="text-5xl md:text-6xl lg:text-7xl font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#FDE68A] via-white to-white leading-[1.15] drop-shadow-2xl"
-            style={{ fontFamily: 'var(--font-great-vibes)' }}
+            className="font-[family-name:var(--font-great-vibes)] text-6xl md:text-7xl lg:text-[5.5rem] font-normal text-slate-100 leading-[1.15] tracking-normal drop-shadow-2xl"
           >
-            Listen Together.
+            Listen <span className="text-[#D6A95B]">Together.</span>
           </h1>
-          <p className="text-slate-400 text-sm md:text-base font-light mt-4 tracking-wide">
+          <p className="text-slate-200 text-sm md:text-lg font-light mt-4 tracking-wide max-w-md mx-auto leading-relaxed drop-shadow-md">
             Create a room, share the code, and enjoy folk music in sync.
           </p>
         </motion.div>
