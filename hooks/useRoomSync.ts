@@ -160,7 +160,7 @@ export function useRoomSync(roomId: string): UseRoomSyncReturn {
       const state: RealtimePresenceState = channel.presenceState();
 
       const roomUsers: RoomUser[] = Object.entries(state).map(([_key, presences]) => {
-        const p = presences[0] as PresencePayload;
+        const p = presences[0] as unknown as PresencePayload;
         return {
           user_id: p.user_id,
           display_name: p.display_name,
@@ -214,7 +214,7 @@ export function useRoomSync(roomId: string): UseRoomSyncReturn {
 
       // Build a sorted list of remaining members (oldest join_time = index 0).
       const remaining = Object.entries(currentState)
-        .map(([, presences]) => presences[0] as PresencePayload)
+        .map(([, presences]) => presences[0] as unknown as PresencePayload)
         .filter(p => p.user_id !== key)
         .sort((a, b) => new Date(a.joined_at).getTime() - new Date(b.joined_at).getTime());
 
