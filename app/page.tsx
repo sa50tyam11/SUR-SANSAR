@@ -259,6 +259,11 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Bottom Left Studio Text */}
+      <div className="absolute bottom-10 left-10 md:bottom-12 md:left-16 z-20 pointer-events-auto drop-shadow-2xl opacity-90 text-slate-400 text-xs font-sans tracking-wide">
+        Made by <a href="https://senostudio.in" target="_blank" rel="noopener noreferrer" className="text-[#D6A95B] hover:text-[#fde68a] transition-colors font-medium">SENO studio</a>
+      </div>
+
       <AnimatePresence>
         {selectedState && (
           <StatePanel
